@@ -43,5 +43,13 @@ const watchlistTitile =
 const trailingDeleting = Icon(
   Icons.delete,
   color: kWhite,
+  size: 34,
+);
+const emptyWatchlist = Text(
+  "Add Stocks into the Watchlist",
+  style: TextStyle(color: kWhite, fontSize: 20),
+);
+const watchlistGap = SizedBox(
+  height: 20,
 );
 //<---------------------------------------------------------------------------------Watch List---------------------------------------------------------------------->

@@ -18,7 +18,7 @@ class DetailsAdapter extends TypeAdapter<Details> {
     };
     return Details(
       companyName: fields[0] as String,
-      price: fields[1] as String,
+      matchScore: fields[1] as String,
     );
   }
 
@@ -29,7 +29,7 @@ class DetailsAdapter extends TypeAdapter<Details> {
       ..writeByte(0)
       ..write(obj.companyName)
       ..writeByte(1)
-      ..write(obj.price);
+      ..write(obj.matchScore);
   }
 
   @override

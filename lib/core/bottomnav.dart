@@ -27,8 +27,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
           });
         },
         selectedIconTheme: const IconThemeData(color: kWhite),
-        unselectedIconTheme: const IconThemeData(color: Kgrey),
-        unselectedItemColor: Kgrey,
+        unselectedIconTheme: const IconThemeData(color: kgrey),
+        unselectedItemColor: kgrey,
         fixedColor: kWhite,
         items: const [
           BottomNavigationBarItem(

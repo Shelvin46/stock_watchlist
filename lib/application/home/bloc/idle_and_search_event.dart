@@ -6,5 +6,6 @@ class InitialResponse extends IdleAndSearchEvent {}
 
 class SerachResponse extends IdleAndSearchEvent {
   String query;
-  SerachResponse({required this.query});
+  BuildContext context;
+  SerachResponse({required this.query,required this.context});
 }

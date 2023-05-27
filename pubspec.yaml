@@ -60,6 +60,7 @@ flutter:
     - assets/pictures/download (5).jpeg
     - assets/pictures/image.jpg
     - assets/animation/8852-searching-for-word.json
+    - assets/animation/61212-add-to-watchlistcart.json
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
   # For details regarding adding assets from package dependencies, see

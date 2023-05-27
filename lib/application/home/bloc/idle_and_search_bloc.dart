@@ -19,14 +19,12 @@ class IdleAndSearchBloc extends Bloc<IdleAndSearchEvent, IdleAndSearchState> {
   IdleAndSearchBloc() : super(IdleAndSearchInitial()) {
     on<SerachResponse>((event, emit) async {
       List<BestMatch> searchedStocks =
-          await SearchResults().gettingResults(event.query);
-
+          await SearchResults().gettingResults(event.query, event.context);
       if (searchedStocks.isNotEmpty) {
         return emit(IdleAndSearchState(
-          isNull: false,
-          searchedProducts: searchedStocks,
-          isEmptyStock: false,
-        ));
+            isNull: false,
+            searchedProducts: searchedStocks,
+            isEmptyStock: false));
       } else {
         return emit(IdleAndSearchState(
             isNull: false, searchedProducts: [], isEmptyStock: true));

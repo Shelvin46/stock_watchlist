@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
 import 'package:stock_watchlist/application/home/bloc/idle_and_search_bloc.dart';
+import 'package:stock_watchlist/application/watchlist/for_watchlist/watchlist_showing_bloc.dart';
 import 'package:stock_watchlist/core/color_constants.dart';
 import 'package:stock_watchlist/core/const_widgets.dart';
 import 'package:stock_watchlist/main.dart';
@@ -14,76 +15,80 @@ class MainHomeScreen extends StatelessWidget {
   final _debouncer = Debouncer(seconds: 2);
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      BlocProvider.of<WatchlistShowingBloc>(context).add(InitializeWatchlist());
+    });
     return Scaffold(
+      // resizeToAvoidBottomInset: false,
+
       backgroundColor: splashBac,
       appBar: AppBar(
+        centerTitle: true,
         backgroundColor: splashBac,
         title: const Text(
           "Welcome to Trade Brains",
           style: homeBarStyle,
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            homeGap15,
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: SizedBox(
-                height: myMediaQueryData.size.height * 0.06,
-                child: CupertinoSearchTextField(
-                  style: const TextStyle(color: kWhite),
-                  itemSize: 34,
-                  itemColor: kWhite,
-                  onChanged: (value) {
-                    if (value.isEmpty) {
-                      return;
-                    } else if (value.isNotEmpty) {
-                      _debouncer.run(() {
-                        BlocProvider.of<IdleAndSearchBloc>(context)
-                            .add(SerachResponse(query: value));
-                      });
-                    }
-                  },
-                ),
+      body: Column(
+        children: [
+          homeGap15,
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SizedBox(
+              height: myMediaQueryData.size.height * 0.06,
+              child: CupertinoSearchTextField(
+                style: const TextStyle(color: kWhite),
+                itemSize: 34,
+                itemColor: kWhite,
+                onChanged: (value) {
+                  if (value.isEmpty) {
+                    return;
+                  } else if (value.isNotEmpty) {
+                    _debouncer.run(() {
+                      BlocProvider.of<IdleAndSearchBloc>(context)
+                          .add(SerachResponse(query: value, context: context));
+                    });
+                  }
+                },
               ),
             ),
-            SizedBox(
-              height: myMediaQueryData.size.height * 0.01,
-            ),
-            BlocBuilder<IdleAndSearchBloc, IdleAndSearchState>(
-              builder: (context, state) {
-                if (state.isNull == true) {
-                  return Column(
-                    children: [
-                      Center(
-                        child: Lottie.asset(
-                            "assets/animation/8852-searching-for-word.json",
-                            fit: BoxFit.cover),
-                      ),
-                      findStocks
-                    ],
-                  );
-                } else if (state.isEmptyStock == true) {
-                  return Column(
-                    children: [
-                      Center(
-                        child: Lottie.asset(
+          ),
+          SizedBox(
+            height: myMediaQueryData.size.height * 0.01,
+          ),
+          BlocBuilder<IdleAndSearchBloc, IdleAndSearchState>(
+            builder: (context, state) {
+              if (state.isNull == true) {
+                return Column(
+                  children: [
+                    Center(
+                      child: Lottie.asset(
                           "assets/animation/8852-searching-for-word.json",
-                          fit: BoxFit.cover,
-                        ),
+                          fit: BoxFit.cover),
+                    ),
+                    findStocks
+                  ],
+                );
+              } else if (state.isEmptyStock == true) {
+                return Column(
+                  children: [
+                    Center(
+                      child: Lottie.asset(
+                        "assets/animation/8852-searching-for-word.json",
+                        fit: BoxFit.cover,
                       ),
-                      errorSearch1,
-                      errorSearch2
-                    ],
-                  );
-                } else {
-                  return const SearchView();
-                }
-              },
-            ),
-          ],
-        ),
+                    ),
+                    errorSearch1,
+                    errorSearch2
+                  ],
+                );
+              } else {
+                return Expanded(child: const SearchView());
+              }
+            },
+          ),
+        ],
       ),
     );
   }
