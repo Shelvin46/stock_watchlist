@@ -23,6 +23,19 @@ const subTitleStyle = TextStyle(color: kWhite, fontSize: 14);
 const trailingAdding = Icon(
   Icons.add,
   color: kWhite,
+  size: 38,
+);
+const findStocks = Text(
+  "Find Your Stocks",
+  style: TextStyle(color: kWhite, fontSize: 35),
+);
+const errorSearch1 = Text(
+  "OOPS!",
+  style: TextStyle(color: kWhite, fontSize: 30),
+);
+const errorSearch2 = Text(
+  'Stock does not Found!!',
+  style: TextStyle(color: kWhite, fontSize: 28),
 );
 //<-----------------------------------------------------------------------------------Home Screen----------------------------------------------------------------->
 const watchlistTitile =
@@ -31,3 +44,4 @@ const trailingDeleting = Icon(
   Icons.delete,
   color: kWhite,
 );
+//<---------------------------------------------------------------------------------Watch List---------------------------------------------------------------------->
