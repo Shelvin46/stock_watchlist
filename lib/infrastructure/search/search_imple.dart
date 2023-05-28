@@ -14,26 +14,13 @@ class SearchResults {
     List<BestMatch> searchedStocks = [];
     var jsonData;
     try {
-      showDialog(
-        context: context,
-        builder: (context) {
-          return const Center(
-            child: CircularProgressIndicator(
-              strokeWidth: 2.0,
-              color: kWhite,
-              backgroundColor: splashBac,
-            ),
-          );
-        },
-      );
-
       var response = await http.get(Uri.parse(
           'https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=$query&apikey=$apiKey'));
       if (response.statusCode == 200) {
         jsonData = jsonDecode(response.body);
         var stockDetailsList = StockDetails.fromJson(jsonData);
         searchedStocks = stockDetailsList.bestMatches;
-        Navigator.pop(context);
+        // Navigator.pop(context);
       }
     } catch (e) {
       log(e.toString());
