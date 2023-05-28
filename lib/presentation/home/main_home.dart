@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
 import 'package:stock_watchlist/application/home/bloc/idle_and_search_bloc.dart';
-import 'package:stock_watchlist/application/watchlist/for_watchlist/watchlist_showing_bloc.dart';
 import 'package:stock_watchlist/core/color_constants.dart';
 import 'package:stock_watchlist/core/const_widgets.dart';
 import 'package:stock_watchlist/main.dart';
@@ -12,15 +11,10 @@ import '../../core/debouncer/debouncer.dart';
 
 class MainHomeScreen extends StatelessWidget {
   MainHomeScreen({super.key});
-  final _debouncer = Debouncer(seconds: 2);
+  final _debouncer = Debouncer(seconds: 1);
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      BlocProvider.of<WatchlistShowingBloc>(context).add(InitializeWatchlist());
-    });
     return Scaffold(
-      // resizeToAvoidBottomInset: false,
-
       backgroundColor: splashBac,
       appBar: AppBar(
         centerTitle: true,
@@ -30,7 +24,7 @@ class MainHomeScreen extends StatelessWidget {
           style: homeBarStyle,
         ),
       ),
-      body: Column(
+      body: ListView(
         children: [
           homeGap15,
           Padding(
@@ -84,7 +78,7 @@ class MainHomeScreen extends StatelessWidget {
                   ],
                 );
               } else {
-                return Expanded(child: const SearchView());
+                return Expanded(child: SearchView());
               }
             },
           ),

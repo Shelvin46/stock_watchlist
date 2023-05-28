@@ -1,10 +1,8 @@
 // ignore_for_file: use_build_context_synchronously
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
 import 'package:stock_watchlist/application/home/bloc/idle_and_search_bloc.dart';
-// import 'package:stock_watchlist/application/home/idle_and_search/idle_and_search_bloc.dart';
 import 'package:stock_watchlist/core/bottomnav.dart';
 import 'package:stock_watchlist/core/color_constants.dart';
 import 'package:stock_watchlist/core/const_widgets.dart';

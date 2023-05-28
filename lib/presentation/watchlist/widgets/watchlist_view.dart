@@ -15,6 +15,9 @@ class WatchlistView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      BlocProvider.of<WatchlistShowingBloc>(context).add(InitializeWatchlist());
+    });
     return BlocBuilder<WatchlistShowingBloc, WatchlistShowingState>(
       builder: (context, state) {
         if (state.isLoading == true) {
