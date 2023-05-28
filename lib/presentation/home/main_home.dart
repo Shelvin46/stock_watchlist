@@ -78,7 +78,7 @@ class MainHomeScreen extends StatelessWidget {
                   ],
                 );
               } else {
-                return Expanded(child: SearchView());
+                return SearchView();
               }
             },
           ),
