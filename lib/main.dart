@@ -9,7 +9,7 @@ import 'domain/watchlist/model/watchlist_class.dart';
 late MediaQueryData myMediaQueryData;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  myMediaQueryData = MediaQueryData.fromWindow(WidgetsBinding.instance.window);
+  myMediaQueryData = MediaQueryData.fromView(WidgetsBinding.instance.window);
   await Hive.initFlutter();
   runApp(const MyApp());
   Hive.registerAdapter(DetailsAdapter());

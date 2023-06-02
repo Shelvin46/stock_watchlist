@@ -1,7 +1,10 @@
 // ignore_for_file: use_build_context_synchronously
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stock_watchlist/core/color_constants.dart';
+import 'package:stock_watchlist/domain/home/model/json_to_dart.dart';
 import 'package:stock_watchlist/domain/watchlist/model/watchlist_class.dart';
 import '../../../application/home/bloc/idle_and_search_bloc.dart';
 import '../../../core/const_widgets.dart';
@@ -11,17 +14,18 @@ String image = 'assets/pictures/image.jpg';
 class SearchView extends StatelessWidget {
   const SearchView({
     super.key,
+    required this.searchedProducts
   });
+  final List<BestMatch> searchedProducts;
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<IdleAndSearchBloc, IdleAndSearchState>(
-      builder: (context, state) {
+
         return ListView.separated(
             shrinkWrap: true,
             physics: const ScrollPhysics(),
             itemBuilder: (context, index) {
-              final eachStock = state.searchedProducts[index];
+              final eachStock = searchedProducts[index];
               return ListTile(
                   leading: ConstrainedBox(
                     constraints: const BoxConstraints(
@@ -68,9 +72,8 @@ class SearchView extends StatelessWidget {
             separatorBuilder: (context, index) {
               return homeDivider;
             },
-            itemCount: state.searchedProducts.length);
-      },
-    );
+            itemCount: searchedProducts.length);
+
   }
 
   SnackBar forToast(String content, Color color) {

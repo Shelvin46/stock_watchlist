@@ -53,35 +53,49 @@ class MainHomeScreen extends StatelessWidget {
           ),
           BlocBuilder<IdleAndSearchBloc, IdleAndSearchState>(
             builder: (context, state) {
-              if (state.isNull == true) {
-                return Column(
-                  children: [
-                    Center(
-                      child: Lottie.asset(
-                          "assets/animation/8852-searching-for-word.json",
-                          fit: BoxFit.cover),
-                    ),
-                    findStocks
-                  ],
-                );
-              } else if (state.isEmptyStock == true) {
-                return Column(
-                  children: [
-                    Center(
-                      child: Lottie.asset(
-                        "assets/animation/8852-searching-for-word.json",
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    errorSearch1,
-                    errorSearch2
-                  ],
+              if (state.isLoading) {
+                return const Center(
+                  child: CircularProgressIndicator(
+                    strokeWidth: 2.0,
+                    color: kWhite,
+                    backgroundColor: splashBac,
+                  ),
                 );
               } else {
-                return SearchView();
+                if (state.isNull) {
+                  return Column(
+                    children: [
+                      Center(
+                        child: Lottie.asset(
+                          "assets/animation/8852-searching-for-word.json",
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      findStocks
+                    ],
+                  );
+                } else if (state.isEmptyStock) {
+                  return Column(
+                    children: [
+                      Center(
+                        child: Lottie.asset(
+                          "assets/animation/8852-searching-for-word.json",
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      errorSearch1,
+                      errorSearch2
+                    ],
+                  );
+                } else {
+                  return SearchView(
+                    searchedProducts: state.searchedProducts,
+                  );
+                }
               }
             },
           ),
+
         ],
       ),
     );
